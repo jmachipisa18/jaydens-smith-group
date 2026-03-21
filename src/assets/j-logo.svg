@@ -1,0 +1,13 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="jLogoGradient" x1="48" y1="6" x2="48" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9A53A" />
+      <stop offset="1" stop-color="#F47C20" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M64 6H80V63.5C80 75.2 77.0667 83.9333 71.2 89.7C65.4333 95.4667 56.9667 98.35 45.8 98.35C37.3 98.35 29.7667 96.4333 23.2 92.6C16.7333 88.7667 11.5333 83.1167 7.6 75.65L20.95 66.8C23.7167 72.0667 27.25 75.95 31.55 78.45C35.95 80.95 40.5667 82.2 45.4 82.2C51.9667 82.2 56.8667 80.4667 60.1 77C63.3667 73.5667 65 68.2667 65 61.1V6H64Z"
+    fill="url(#jLogoGradient)"
+    transform="translate(4 -4) scale(0.9)"
+  />
+</svg>
