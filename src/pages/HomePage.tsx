@@ -76,7 +76,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <EnquiryFormSection />
+      <EnquiryFormSection source="Home page" />
 
       <section className="section-space">
         <div className="container-shell">

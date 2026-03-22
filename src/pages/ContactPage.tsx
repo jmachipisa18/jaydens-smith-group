@@ -1,8 +1,72 @@
+import { FormEvent, useState } from 'react';
 import { MapPinned, Phone, Wrench } from 'lucide-react';
+import {
+  submitFormPayload,
+  type ContactEnquiryErrors,
+  type ContactEnquiryValues,
+  type SubmitState,
+  validateContactEnquiryForm,
+} from '../lib/formSubmission';
 import { areas, company, contactReasons } from '../data/siteData';
 import { SectionIntro } from '../components/SectionIntro';
 
 export function ContactPage() {
+  const [values, setValues] = useState<ContactEnquiryValues>({
+    name: '',
+    phone: '',
+    serviceNeeded: contactReasons[0] ?? '',
+    message: '',
+    website: '',
+  });
+  const [errors, setErrors] = useState<ContactEnquiryErrors>({});
+  const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' });
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const nextErrors = validateContactEnquiryForm(values);
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      setSubmitState({ status: 'error', message: 'Please correct the highlighted fields and try again.' });
+      return;
+    }
+
+    setSubmitState({ status: 'submitting' });
+
+    try {
+      const message = await submitFormPayload({
+        formName: 'contact-enquiry',
+        source: 'Contact page',
+        name: values.name.trim(),
+        phone: values.phone.trim(),
+        serviceNeeded: values.serviceNeeded,
+        message: values.message.trim(),
+        website: values.website,
+      });
+
+      setValues({
+        name: '',
+        phone: '',
+        serviceNeeded: contactReasons[0] ?? '',
+        message: '',
+        website: '',
+      });
+      setErrors({});
+      setSubmitState({ status: 'success', message });
+    } catch (error) {
+      setSubmitState({
+        status: 'error',
+        message: error instanceof Error ? error.message : 'Something went wrong while sending your enquiry.',
+      });
+    }
+  }
+
+  function updateField<K extends keyof ContactEnquiryValues>(field: K, value: ContactEnquiryValues[K]) {
+    setValues((current) => ({ ...current, [field]: value }));
+    setErrors((current) => ({ ...current, [field]: undefined }));
+  }
+
   return (
     <div className="overflow-x-clip">
       <section className="relative overflow-hidden bg-brand-navy text-white">
@@ -55,34 +119,82 @@ export function ContactPage() {
             <SectionIntro
               eyebrow="Get In Touch"
               title="Request a callback or free quote"
-              description="This contact form is built as production-style UI and ready to connect to your preferred form handling later."
+              description="Send your details and we will review the enquiry, contact you quickly, and keep a record of the submission for follow-up."
             />
-            <form className="mt-8 grid gap-5 sm:grid-cols-2">
+            <form className="mt-8 grid gap-5 sm:grid-cols-2" onSubmit={handleSubmit} noValidate>
               <label className="sm:col-span-1">
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Name</span>
-                <input className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100" placeholder="Your name" />
+                <input
+                  required
+                  value={values.name}
+                  onChange={(event) => updateField('name', event.target.value)}
+                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  placeholder="Your name"
+                />
+                {errors.name ? <p className="mt-2 text-sm font-medium text-red-600">{errors.name}</p> : null}
               </label>
               <label className="sm:col-span-1">
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Phone</span>
-                <input className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100" placeholder="07469 343232" />
+                <input
+                  required
+                  value={values.phone}
+                  onChange={(event) => updateField('phone', event.target.value)}
+                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  placeholder="07469 343232"
+                />
+                {errors.phone ? <p className="mt-2 text-sm font-medium text-red-600">{errors.phone}</p> : null}
               </label>
               <label className="sm:col-span-2">
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Service Needed</span>
-                <select className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100">
+                <select
+                  required
+                  value={values.serviceNeeded}
+                  onChange={(event) => updateField('serviceNeeded', event.target.value)}
+                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                >
                   {contactReasons.map((reason) => (
-                    <option key={reason}>{reason}</option>
+                    <option key={reason} value={reason}>
+                      {reason}
+                    </option>
                   ))}
                 </select>
+                {errors.serviceNeeded ? <p className="mt-2 text-sm font-medium text-red-600">{errors.serviceNeeded}</p> : null}
               </label>
               <label className="sm:col-span-2">
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Message</span>
                 <textarea
+                  required
+                  value={values.message}
+                  onChange={(event) => updateField('message', event.target.value)}
                   className="min-h-36 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                   placeholder="Tell us what’s happening and where you are based."
                 />
+                {errors.message ? <p className="mt-2 text-sm font-medium text-red-600">{errors.message}</p> : null}
               </label>
-              <button type="button" className="primary-button sm:col-span-2">
-                Send Enquiry
+              <label className="hidden" aria-hidden="true">
+                Website
+                <input
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={values.website}
+                  onChange={(event) => updateField('website', event.target.value)}
+                />
+              </label>
+              {submitState.status !== 'idle' ? (
+                <div
+                  className={`rounded-2xl px-4 py-3 text-sm font-medium sm:col-span-2 ${
+                    submitState.status === 'success'
+                      ? 'bg-emerald-50 text-emerald-700'
+                      : submitState.status === 'error'
+                        ? 'bg-red-50 text-red-700'
+                        : 'bg-slate-100 text-slate-700'
+                  }`}
+                >
+                  {submitState.status === 'submitting' ? 'Sending your enquiry...' : submitState.message}
+                </div>
+              ) : null}
+              <button type="submit" disabled={submitState.status === 'submitting'} className="primary-button sm:col-span-2">
+                {submitState.status === 'submitting' ? 'Sending...' : 'Send Enquiry'}
               </button>
             </form>
           </div>

@@ -15,3 +15,4 @@ coverage
 *.tsbuildinfo
 node-v*-darwin-arm64
 node-v*-darwin-arm64.tar.gz
+.env*.local

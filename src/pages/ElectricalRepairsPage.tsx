@@ -130,7 +130,7 @@ export function ElectricalRepairsPage() {
           <HowWeWorkSection />
         </>
       }
-      afterContent={<EnquiryFormSection />}
+      afterContent={<EnquiryFormSection source="Electrical Repairs page" />}
     />
   );
 }
