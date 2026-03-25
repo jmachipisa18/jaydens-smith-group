@@ -1,6 +1,23 @@
 import { motion } from 'framer-motion';
-import { Clock3, Droplets, PhoneCall, Search, ShieldCheck, Wrench } from 'lucide-react';
+import {
+  Bath,
+  Clock3,
+  Droplets,
+  DropletOff,
+  Gauge,
+  Heater,
+  PhoneCall,
+  Search,
+  ShieldCheck,
+  ThermometerSnowflake,
+  Toilet,
+  Waves,
+  CookingPot,
+  Wrench,
+  Workflow,
+} from 'lucide-react';
 import { EnquiryFormSection } from '../components/EnquiryFormSection';
+import { IssueGridSection } from '../components/IssueGridSection';
 import { ServiceOverviewCard, ServicePageTemplate } from '../components/ServicePageTemplate';
 import { company, services } from '../data/siteData';
 import { SectionIntro } from '../components/SectionIntro';
@@ -45,6 +62,18 @@ const processSteps = [
     ),
     icon: ShieldCheck,
   },
+];
+
+const emergencyIssueCards = [
+  { title: 'Blocked Drains', icon: Waves },
+  { title: 'Low Water Pressure', icon: Gauge },
+  { title: 'Bathroom Repairs', icon: Bath },
+  { title: 'Burst Pipes', icon: DropletOff },
+  { title: 'Pipe Upgrades', icon: Workflow },
+  { title: 'Boiler Repairs', icon: Heater },
+  { title: 'No Hot Water', icon: ThermometerSnowflake },
+  { title: 'Toilet Install / Upgrade', icon: Toilet },
+  { title: 'Kitchen Repairs', icon: CookingPot },
 ];
 
 function HowWeWorkSection() {
@@ -128,6 +157,12 @@ export function EmergencyPlumbingPage() {
             </div>
           </section>
           <HowWeWorkSection />
+          <IssueGridSection
+            eyebrow="Common Plumbing Issues"
+            title="Emergency Services We Provide"
+            description={"Plumbing problem? We've seen it all.\nThere's not a problem you have that we can't solve."}
+            items={emergencyIssueCards}
+          />
         </>
       }
       afterContent={<EnquiryFormSection source="Emergency Plumbing page" />}

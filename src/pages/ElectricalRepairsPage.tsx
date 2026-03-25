@@ -1,6 +1,22 @@
 import { motion } from 'framer-motion';
-import { BadgeCheck, Clock3, PhoneCall, Search, ShieldCheck, Wrench } from 'lucide-react';
+import {
+  BadgeCheck,
+  Cable,
+  Clock3,
+  Lightbulb,
+  PhoneCall,
+  Search,
+  ShieldAlert,
+  ShieldCheck,
+  SquareDashedBottomCode,
+  TabletSmartphone,
+  Unplug,
+  Wrench,
+  Zap,
+  Radar,
+} from 'lucide-react';
 import { EnquiryFormSection } from '../components/EnquiryFormSection';
+import { IssueGridSection } from '../components/IssueGridSection';
 import { ServiceOverviewCard, ServicePageTemplate } from '../components/ServicePageTemplate';
 import { company, services } from '../data/siteData';
 import { SectionIntro } from '../components/SectionIntro';
@@ -45,6 +61,18 @@ const processSteps = [
     ),
     icon: ShieldCheck,
   },
+];
+
+const electricalIssueCards = [
+  { title: 'Lighting', icon: Lightbulb },
+  { title: 'Fault Finding', icon: Radar },
+  { title: 'Power Generators', icon: Zap },
+  { title: 'Circuit Breaker Panels', icon: SquareDashedBottomCode },
+  { title: 'Surge Protection', icon: ShieldAlert },
+  { title: 'Electrical Wire Expansion', icon: Cable },
+  { title: 'Device Upgrades', icon: TabletSmartphone },
+  { title: 'Electric Panel Upgrades', icon: Unplug },
+  { title: 'Troubleshooting', icon: Wrench },
 ];
 
 function HowWeWorkSection() {
@@ -128,6 +156,12 @@ export function ElectricalRepairsPage() {
             </div>
           </section>
           <HowWeWorkSection />
+          <IssueGridSection
+            eyebrow="Common Electrical Services"
+            title="Emergency Electrical Services We Provide"
+            description="Common electrical issues and urgent services we can help with."
+            items={electricalIssueCards}
+          />
         </>
       }
       afterContent={<EnquiryFormSection source="Electrical Repairs page" />}

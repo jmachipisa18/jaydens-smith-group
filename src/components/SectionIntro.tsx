@@ -32,7 +32,7 @@ export function SectionIntro({
         </p>
       ) : null}
       <h2 className="text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">{title}</h2>
-      <p className="mt-4 text-lg leading-8 text-slate-600">{description}</p>
+      <p className="mt-4 whitespace-pre-line text-lg leading-8 text-slate-600">{description}</p>
       {action ? <div className="mt-6">{action}</div> : null}
     </motion.div>
   );
