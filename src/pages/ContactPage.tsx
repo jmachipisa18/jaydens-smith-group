@@ -147,9 +147,10 @@ export function ContactPage() {
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Name</span>
                 <input
                   required
+                  autoComplete="name"
                   value={values.name}
                   onChange={(event) => updateField('name', event.target.value)}
-                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                   placeholder="Your name"
                 />
                 {errors.name ? <p className="mt-2 text-sm font-medium text-red-600">{errors.name}</p> : null}
@@ -158,9 +159,12 @@ export function ContactPage() {
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Phone</span>
                 <input
                   required
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
                   value={values.phone}
                   onChange={(event) => updateField('phone', event.target.value)}
-                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                   placeholder="07469 343232"
                 />
                 {errors.phone ? <p className="mt-2 text-sm font-medium text-red-600">{errors.phone}</p> : null}
@@ -168,9 +172,10 @@ export function ContactPage() {
               <label className="sm:col-span-1">
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Postcode</span>
                 <input
+                  autoComplete="postal-code"
                   value={values.postcode}
                   onChange={(event) => updateField('postcode', event.target.value)}
-                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 uppercase outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base uppercase outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                   placeholder="LE1 1AA"
                 />
               </label>
@@ -180,7 +185,7 @@ export function ContactPage() {
                   required
                   value={values.serviceNeeded}
                   onChange={(event) => updateField('serviceNeeded', event.target.value)}
-                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                 >
                   {contactReasons.map((reason) => (
                     <option key={reason} value={reason}>
@@ -196,7 +201,7 @@ export function ContactPage() {
                   required
                   value={values.message}
                   onChange={(event) => updateField('message', event.target.value)}
-                  className="min-h-36 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  className="min-h-36 w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                   placeholder="Tell us what’s happening and where you are based."
                 />
                 {errors.message ? <p className="mt-2 text-sm font-medium text-red-600">{errors.message}</p> : null}

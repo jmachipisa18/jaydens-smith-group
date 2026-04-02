@@ -52,21 +52,21 @@ export function HeroLeadForm() {
   }
 
   return (
-    <div className="w-full max-w-3xl rounded-[2rem] bg-white p-6 text-brand-navy shadow-[0_30px_80px_rgba(8,22,38,0.28)] sm:p-8">
-      <div className="max-w-2xl">
+    <div className="w-full max-w-2xl rounded-[2rem] bg-white/98 p-5 text-brand-navy shadow-[0_30px_80px_rgba(8,22,38,0.28)] backdrop-blur-sm sm:p-8">
+      <div className="max-w-xl text-center sm:text-left">
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-brand-orange">Get Started</p>
-        <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+        <h1 className="mt-3 text-[1.95rem] font-extrabold tracking-tight sm:text-4xl">
           Tell us what you need and we&apos;ll get you to the right next step.
         </h1>
       </div>
 
-      <form className="mt-6 grid gap-4 lg:grid-cols-[1.7fr_0.9fr_auto] lg:items-start" onSubmit={handleSubmit} noValidate>
+      <form className="mt-6 grid gap-4 lg:grid-cols-[1.6fr_0.95fr_auto] lg:items-start" onSubmit={handleSubmit} noValidate>
         <label className="block">
           <span className="mb-2 block text-sm font-semibold">I need help with…</span>
           <select
             value={values.service}
             onChange={(event) => updateField('service', event.target.value)}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+            className="min-h-[54px] w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
           >
             <option value="" disabled>
               I need help with…
@@ -89,19 +89,21 @@ export function HeroLeadForm() {
           <input
             value={values.postcode}
             onChange={(event) => updateField('postcode', event.target.value)}
-            className="w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base uppercase outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+            autoComplete="postal-code"
+            inputMode="text"
+            className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base uppercase outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
             placeholder="LE1 1AA"
           />
           {errors.postcode ? <p className="mt-2 text-sm font-medium text-red-600">{errors.postcode}</p> : null}
         </label>
 
-        <button type="submit" className="primary-button h-[54px] w-full justify-center self-end px-8 lg:w-auto">
+        <button type="submit" className="primary-button w-full justify-center self-end px-8 lg:w-auto">
           Get Started
           <ArrowRight className="h-4 w-4" />
         </button>
       </form>
 
-      <div className="mt-5 inline-flex flex-wrap items-center gap-3 rounded-[1.25rem] border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-3 rounded-[1.25rem] border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 sm:justify-start">
         <span className="inline-flex items-center gap-2">
           <span className="text-lg font-extrabold tracking-tight">
             <span className="text-[#4285F4]">G</span>
@@ -119,7 +121,7 @@ export function HeroLeadForm() {
             </svg>
           ))}
         </div>
-        <span className="text-brand-navy">25+ 5 star reviews</span>
+        <span className="text-center text-brand-navy">25+ 5 star reviews</span>
       </div>
     </div>
   );

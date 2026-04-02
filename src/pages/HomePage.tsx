@@ -36,8 +36,8 @@ export function HomePage() {
             backgroundSize: 'cover',
           }}
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,22,38,0.78)_0%,rgba(8,22,38,0.48)_42%,rgba(8,22,38,0.58)_100%)]" />
-        <div className="container-shell relative flex min-h-[560px] items-center py-16 sm:py-24 lg:min-h-[620px]">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,22,38,0.76)_0%,rgba(8,22,38,0.58)_52%,rgba(8,22,38,0.68)_100%)] sm:bg-[linear-gradient(90deg,rgba(8,22,38,0.78)_0%,rgba(8,22,38,0.48)_42%,rgba(8,22,38,0.58)_100%)]" />
+        <div className="container-shell relative flex min-h-[460px] items-center py-12 sm:min-h-[560px] sm:py-20 lg:min-h-[620px] lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -106,11 +106,11 @@ export function HomePage() {
             description=""
             align="center"
           />
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3 lg:gap-6">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.name}
-                className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,39,64,0.12)]"
+                className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,39,64,0.12)] sm:p-7"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -133,7 +133,7 @@ export function HomePage() {
                     Google
                   </div>
                 </div>
-                <p className="mt-6 leading-7 text-slate-600">{testimonial.text}</p>
+                <p className="mt-6 text-[15px] leading-7 text-slate-600 sm:text-base">{testimonial.text}</p>
                 <div className="mt-6 flex items-center gap-2 text-sm font-medium text-slate-500">
                   <Quote className="h-4 w-4 text-orange-200" />
                   Verified-style placeholder review

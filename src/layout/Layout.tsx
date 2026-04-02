@@ -25,13 +25,14 @@ export function Layout() {
       <ScrollManager />
       <header className="sticky top-0 z-50">
         <div className="border-b border-white/10 bg-brand-navy text-white">
-          <div className="container-shell flex min-h-11 flex-col justify-center gap-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] sm:flex-row sm:items-center sm:justify-between sm:text-sm">
-            <div className="flex flex-wrap items-center gap-3 text-white/80">
+          <div className="container-shell flex min-h-11 items-center justify-between gap-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-sm">
+            <div className="text-white/80 sm:hidden">24/7 emergency service</div>
+            <div className="hidden flex-wrap items-center gap-3 text-white/80 sm:flex">
               {topBarItems.map((item) => (
                 <span key={item}>{item}</span>
               ))}
             </div>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-4">
               <span className="inline-flex items-center gap-2 text-white/80">
                 <Clock3 className="h-4 w-4" />
                 24/7 Callouts
@@ -44,14 +45,14 @@ export function Layout() {
           </div>
         </div>
         <div className="border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
-          <div className="container-shell flex items-center justify-between gap-4 py-4">
+          <div className="container-shell flex items-center justify-between gap-3 py-3 sm:gap-4 sm:py-4">
             <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-              <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-white p-1 ring-1 ring-slate-200">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white p-1 ring-1 ring-slate-200 sm:h-12 sm:w-12">
                 <img src={jLogo} alt="Jayden’s Smith Group logo" className="h-full w-full object-contain" />
               </div>
-              <div>
-                <p className="text-lg font-extrabold text-brand-navy">{company.name}</p>
-                <p className="text-sm text-slate-500">Emergency electrician and plumber</p>
+              <div className="min-w-0">
+                <p className="truncate text-base font-extrabold text-brand-navy sm:text-lg">{company.name}</p>
+                <p className="hidden text-sm text-slate-500 sm:block">Emergency electrician and plumber</p>
               </div>
             </Link>
 
@@ -161,9 +162,10 @@ export function Layout() {
 
             <button
               type="button"
-              className="inline-flex rounded-full border border-slate-200 p-3 text-brand-navy lg:hidden"
+              className="inline-flex rounded-full border border-slate-200 bg-white p-3 text-brand-navy shadow-sm transition duration-200 hover:border-orange-200 hover:text-brand-orange lg:hidden"
               onClick={() => setOpen((value) => !value)}
               aria-label="Toggle navigation"
+              aria-expanded={open}
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -176,7 +178,7 @@ export function Layout() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden border-t border-slate-200 bg-white lg:hidden"
               >
-                <div className="container-shell flex flex-col py-4">
+                <div className="container-shell flex max-h-[calc(100vh-9rem)] flex-col space-y-1 overflow-y-auto py-4 pb-5">
                   {standardNavLinks.slice(0, 1).map((link) => (
                     <NavLink
                       key={link.path}
@@ -253,9 +255,19 @@ export function Layout() {
         </div>
       </header>
 
-      <main>
+      <main className="pb-24 lg:pb-0">
         <Outlet />
       </main>
+
+      <div className="fixed inset-x-4 bottom-4 z-40 lg:hidden">
+        <a
+          href={company.tel}
+          className="primary-button w-full rounded-[1.35rem] shadow-[0_18px_45px_rgba(244,124,32,0.35)]"
+        >
+          <Phone className="h-4 w-4" />
+          Call Now {company.phone}
+        </a>
+      </div>
 
       <footer className="bg-brand-navy text-white">
         <div className="border-t border-white/10">

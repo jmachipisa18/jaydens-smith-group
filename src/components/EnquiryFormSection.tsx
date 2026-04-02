@@ -141,10 +141,11 @@ export function EnquiryFormSection({
               <input
                 required
                 ref={firstNameRef}
+                autoComplete="given-name"
                 name="firstName"
                 value={values.firstName}
                 onChange={(event) => updateField('firstName', event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                 placeholder="First name"
               />
               {errors.firstName ? <p className="mt-2 text-sm font-medium text-red-600">{errors.firstName}</p> : null}
@@ -154,10 +155,11 @@ export function EnquiryFormSection({
               <input
                 required
                 ref={lastNameRef}
+                autoComplete="family-name"
                 name="lastName"
                 value={values.lastName}
                 onChange={(event) => updateField('lastName', event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                 placeholder="Last name"
               />
               {errors.lastName ? <p className="mt-2 text-sm font-medium text-red-600">{errors.lastName}</p> : null}
@@ -168,9 +170,12 @@ export function EnquiryFormSection({
                 required
                 ref={phoneRef}
                 name="phone"
+                type="tel"
+                autoComplete="tel"
+                inputMode="tel"
                 value={values.phone}
                 onChange={(event) => updateField('phone', event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                 placeholder="07469 343232"
               />
               {errors.phone ? <p className="mt-2 text-sm font-medium text-red-600">{errors.phone}</p> : null}
@@ -182,9 +187,11 @@ export function EnquiryFormSection({
                 type="email"
                 ref={emailRef}
                 name="email"
+                autoComplete="email"
+                inputMode="email"
                 value={values.email}
                 onChange={(event) => updateField('email', event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                className="min-h-[54px] w-full rounded-2xl border border-slate-200 px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
                 placeholder="you@example.com"
               />
               {errors.email ? <p className="mt-2 text-sm font-medium text-red-600">{errors.email}</p> : null}
@@ -196,7 +203,7 @@ export function EnquiryFormSection({
                 name="serviceNeeded"
                 value={values.serviceNeeded}
                 onChange={(event) => updateField('serviceNeeded', event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                className="min-h-[54px] w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-base outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
               >
                 <option value="" disabled>
                   Select a service
