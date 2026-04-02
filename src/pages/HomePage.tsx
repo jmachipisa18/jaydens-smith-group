@@ -36,7 +36,7 @@ export function HomePage() {
             backgroundSize: 'cover',
           }}
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,22,38,0.76)_0%,rgba(8,22,38,0.58)_52%,rgba(8,22,38,0.68)_100%)] sm:bg-[linear-gradient(90deg,rgba(8,22,38,0.78)_0%,rgba(8,22,38,0.48)_42%,rgba(8,22,38,0.58)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,22,38,0.78)_0%,rgba(8,22,38,0.48)_42%,rgba(8,22,38,0.58)_100%)]" />
         <div className="container-shell relative flex min-h-[460px] items-center py-12 sm:min-h-[560px] sm:py-20 lg:min-h-[620px] lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

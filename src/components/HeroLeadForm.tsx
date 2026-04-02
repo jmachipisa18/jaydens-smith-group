@@ -52,7 +52,7 @@ export function HeroLeadForm() {
   }
 
   return (
-    <div className="w-full max-w-2xl rounded-[2rem] bg-white/98 p-5 text-brand-navy shadow-[0_30px_80px_rgba(8,22,38,0.28)] backdrop-blur-sm sm:p-8">
+    <div className="w-full max-w-2xl rounded-[2rem] border border-white/70 bg-white p-5 text-brand-navy shadow-[0_26px_70px_rgba(8,22,38,0.22)] sm:p-8">
       <div className="max-w-xl text-center sm:text-left">
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-brand-orange">Get Started</p>
         <h1 className="mt-3 text-[1.95rem] font-extrabold tracking-tight sm:text-4xl">
@@ -103,7 +103,7 @@ export function HeroLeadForm() {
         </button>
       </form>
 
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-3 rounded-[1.25rem] border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 sm:justify-start">
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-3 rounded-[1.25rem] border border-slate-200/90 bg-white px-4 py-3 text-sm font-semibold text-slate-700 sm:justify-start">
         <span className="inline-flex items-center gap-2">
           <span className="text-lg font-extrabold tracking-tight">
             <span className="text-[#4285F4]">G</span>
