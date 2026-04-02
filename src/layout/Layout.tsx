@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import jLogo from '../assets/j-logo.svg';
+import { ScrollManager } from '../components/ScrollManager';
 import { areas, company, footerServices, navLinks, topBarItems } from '../data/siteData';
 
 export function Layout() {
@@ -14,10 +15,14 @@ export function Layout() {
   const desktopNavLinks = navLinks.filter(
     (link) => link.path !== '/electrical-repairs' && link.path !== '/emergency-plumbing',
   );
+  const projectLinks = navLinks.filter((link) => link.path === '/rewiring');
+  const standardNavLinks = desktopNavLinks.filter((link) => link.path !== '/rewiring');
   const emergencyActive = emergencyLinks.some((link) => link.path === location.pathname);
+  const projectsActive = projectLinks.some((link) => link.path === location.pathname);
 
   return (
     <div className="min-h-screen bg-brand-cream">
+      <ScrollManager />
       <header className="sticky top-0 z-50">
         <div className="border-b border-white/10 bg-brand-navy text-white">
           <div className="container-shell flex min-h-11 flex-col justify-center gap-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] sm:flex-row sm:items-center sm:justify-between sm:text-sm">
@@ -52,7 +57,7 @@ export function Layout() {
 
             <nav className="hidden flex-1 items-center justify-center lg:flex">
               <div className="flex items-center gap-8 xl:gap-10">
-                {desktopNavLinks.slice(0, 1).map((link) => (
+                {standardNavLinks.slice(0, 1).map((link) => (
                   <NavLink
                     key={link.path}
                     to={link.path}
@@ -65,6 +70,37 @@ export function Layout() {
                     {link.label}
                   </NavLink>
                 ))}
+
+                <div className="group relative">
+                  <button
+                    type="button"
+                    className={`inline-flex items-center gap-2 text-sm font-semibold transition duration-200 ${
+                      projectsActive ? 'text-brand-orange' : 'text-brand-navy group-hover:text-brand-orange'
+                    }`}
+                  >
+                    Projects
+                    <ChevronDown className="h-4 w-4 transition duration-200 group-hover:rotate-180" />
+                  </button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-4 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+                    <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white p-2 shadow-[0_24px_60px_rgba(15,39,64,0.14)]">
+                      {projectLinks.map((link) => (
+                        <NavLink
+                          key={link.path}
+                          to={link.path}
+                          className={({ isActive }) =>
+                            `block rounded-2xl px-4 py-3 text-sm font-semibold transition duration-200 ${
+                              isActive
+                                ? 'bg-orange-50 text-brand-orange'
+                                : 'text-brand-navy hover:bg-slate-50 hover:text-brand-orange'
+                            }`
+                          }
+                        >
+                          {link.label}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </div>
+                </div>
 
                 <div className="group relative">
                   <button
@@ -97,7 +133,7 @@ export function Layout() {
                   </div>
                 </div>
 
-                {desktopNavLinks.slice(1).map((link) => (
+                {standardNavLinks.slice(1).map((link) => (
                   <NavLink
                     key={link.path}
                     to={link.path}
@@ -118,7 +154,7 @@ export function Layout() {
                 <Phone className="h-4 w-4 text-brand-orange" />
                 {company.phone}
               </a>
-              <Link to="/contact" className="primary-button">
+              <Link to="/contact#contact-form" className="primary-button">
                 Get a Quote
               </Link>
             </div>
@@ -141,7 +177,7 @@ export function Layout() {
                 className="overflow-hidden border-t border-slate-200 bg-white lg:hidden"
               >
                 <div className="container-shell flex flex-col py-4">
-                  {desktopNavLinks.slice(0, 1).map((link) => (
+                  {standardNavLinks.slice(0, 1).map((link) => (
                     <NavLink
                       key={link.path}
                       to={link.path}
@@ -155,6 +191,23 @@ export function Layout() {
                       {link.label}
                     </NavLink>
                   ))}
+                  <div className="mt-2 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-2">
+                    <p className="px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Projects</p>
+                    {projectLinks.map((link) => (
+                      <NavLink
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setOpen(false)}
+                        className={({ isActive }) =>
+                          `block rounded-2xl px-4 py-3 text-sm font-semibold ${
+                            isActive ? 'bg-orange-50 text-brand-orange' : 'text-brand-navy hover:bg-white'
+                          }`
+                        }
+                      >
+                        {link.label}
+                      </NavLink>
+                    ))}
+                  </div>
                   <div className="mt-2 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-2">
                     <p className="px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Emergency</p>
                     {emergencyLinks.map((link) => (
@@ -172,7 +225,7 @@ export function Layout() {
                       </NavLink>
                     ))}
                   </div>
-                  {desktopNavLinks.slice(1).map((link) => (
+                  {standardNavLinks.slice(1).map((link) => (
                     <NavLink
                       key={link.path}
                       to={link.path}
@@ -190,7 +243,7 @@ export function Layout() {
                     <Phone className="h-4 w-4 text-brand-orange" />
                     {company.phone}
                   </a>
-                  <Link to="/contact" onClick={() => setOpen(false)} className="primary-button mt-3">
+                  <Link to="/contact#contact-form" onClick={() => setOpen(false)} className="primary-button mt-3">
                     Get a Quote
                   </Link>
                 </div>

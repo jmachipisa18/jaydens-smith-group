@@ -92,7 +92,7 @@ export function ServicePageTemplate({
                 <PhoneCall className="h-4 w-4" />
                 Call Now: {company.phone}
               </a>
-              <Link to="/contact" className="secondary-button w-full sm:w-auto">
+              <Link to="/contact#contact-form" className="secondary-button w-full sm:w-auto">
                 Get Free Quote
               </Link>
             </div>
@@ -202,7 +202,7 @@ export function ServicePageTemplate({
               <a href={company.tel} className="secondary-button w-full sm:w-auto">
                 Call {company.phone}
               </a>
-              <Link to="/contact" className="secondary-button w-full border-white/40 bg-transparent text-white hover:bg-white/10 sm:w-auto">
+              <Link to="/contact#contact-form" className="secondary-button w-full border-white/40 bg-transparent text-white hover:bg-white/10 sm:w-auto">
                 Get Free Quote
               </Link>
             </div>

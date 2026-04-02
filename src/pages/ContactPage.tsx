@@ -1,5 +1,6 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { MapPinned, Phone, Wrench } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import {
   submitFormPayload,
   type ContactEnquiryErrors,
@@ -11,15 +12,33 @@ import { areas, company, contactReasons } from '../data/siteData';
 import { SectionIntro } from '../components/SectionIntro';
 
 export function ContactPage() {
+  const [searchParams] = useSearchParams();
   const [values, setValues] = useState<ContactEnquiryValues>({
     name: '',
     phone: '',
+    postcode: '',
     serviceNeeded: contactReasons[0] ?? '',
     message: '',
     website: '',
   });
   const [errors, setErrors] = useState<ContactEnquiryErrors>({});
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' });
+
+  useEffect(() => {
+    const serviceFromQuery = searchParams.get('service')?.trim();
+    const postcodeFromQuery = searchParams.get('postcode')?.trim();
+
+    if (!serviceFromQuery && !postcodeFromQuery) {
+      return;
+    }
+
+    setValues((current) => ({
+      ...current,
+      serviceNeeded:
+        serviceFromQuery && contactReasons.includes(serviceFromQuery) ? serviceFromQuery : current.serviceNeeded,
+      postcode: postcodeFromQuery ? postcodeFromQuery.toUpperCase() : current.postcode,
+    }));
+  }, [searchParams]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -40,6 +59,7 @@ export function ContactPage() {
         source: 'Contact page',
         name: values.name.trim(),
         phone: values.phone.trim(),
+        postcode: values.postcode.trim(),
         serviceNeeded: values.serviceNeeded,
         message: values.message.trim(),
         website: values.website,
@@ -48,6 +68,7 @@ export function ContactPage() {
       setValues({
         name: '',
         phone: '',
+        postcode: '',
         serviceNeeded: contactReasons[0] ?? '',
         message: '',
         website: '',
@@ -115,7 +136,7 @@ export function ContactPage() {
             })}
           </div>
 
-          <div className="rounded-[2rem] bg-white p-6 shadow-soft lg:p-10">
+          <div id="contact-form" className="rounded-[2rem] bg-white p-6 shadow-soft lg:p-10">
             <SectionIntro
               eyebrow="Get In Touch"
               title="Request a callback or free quote"
@@ -143,6 +164,15 @@ export function ContactPage() {
                   placeholder="07469 343232"
                 />
                 {errors.phone ? <p className="mt-2 text-sm font-medium text-red-600">{errors.phone}</p> : null}
+              </label>
+              <label className="sm:col-span-1">
+                <span className="mb-2 block text-sm font-semibold text-brand-navy">Postcode</span>
+                <input
+                  value={values.postcode}
+                  onChange={(event) => updateField('postcode', event.target.value)}
+                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 uppercase outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-orange-100"
+                  placeholder="LE1 1AA"
+                />
               </label>
               <label className="sm:col-span-2">
                 <span className="mb-2 block text-sm font-semibold text-brand-navy">Service Needed</span>

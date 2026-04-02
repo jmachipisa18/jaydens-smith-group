@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import {
   Bath,
   Clock3,
@@ -128,6 +129,14 @@ function HowWeWorkSection() {
 }
 
 export function EmergencyPlumbingPage() {
+  const [selectedService, setSelectedService] = useState('');
+  const [prefillTrigger, setPrefillTrigger] = useState(0);
+
+  function handleServiceSelect(serviceTitle: string) {
+    setSelectedService(serviceTitle);
+    setPrefillTrigger((current) => current + 1);
+  }
+
   return (
     <ServicePageTemplate
       content={emergencyPlumbingContent!}
@@ -149,6 +158,7 @@ export function EmergencyPlumbingPage() {
       ]}
       afterHero={
         <>
+          <EnquiryFormSection source="Emergency Plumbing page hero form" />
           <section className="section-space bg-white">
             <div className="container-shell">
               <div className="mx-auto max-w-4xl">
@@ -162,10 +172,18 @@ export function EmergencyPlumbingPage() {
             title="Emergency Services We Provide"
             description={"Plumbing problem? We've seen it all.\nThere's not a problem you have that we can't solve."}
             items={emergencyIssueCards}
+            onItemSelect={handleServiceSelect}
           />
         </>
       }
-      afterContent={<EnquiryFormSection source="Emergency Plumbing page" />}
+      afterContent={
+        <EnquiryFormSection
+          sectionId="emergency-plumbing-form"
+          source="Emergency Plumbing page"
+          prefilledService={selectedService}
+          prefillTrigger={prefillTrigger}
+        />
+      }
     />
   );
 }

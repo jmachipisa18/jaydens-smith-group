@@ -47,9 +47,8 @@ export const services: ServicePageContent[] = [
   {
     title: 'Electrical Repairs',
     path: '/electrical-repairs',
-    heroTitle: 'Fast electrical repairs from a trusted electrician Leicester homeowners can rely on',
-    heroDescription:
-      'From fault finding and tripping circuits to emergency electrician Leicester callouts, we deliver safe, tidy, and responsive repairs across homes and local businesses.',
+    heroTitle: '24/7 Emergency Electrician In Leicestershire',
+    heroDescription: 'We Will Be At Your Door In 1 Hour Or Less',
     overview:
       'Our electrical repairs service focuses on restoring power safely and quickly. We diagnose faults, explain the issue clearly, and carry out dependable repairs with minimal disruption.',
     overviewPoints: [
@@ -97,9 +96,8 @@ export const services: ServicePageContent[] = [
   {
     title: 'Emergency Plumbing',
     path: '/emergency-plumbing',
-    heroTitle: 'Emergency plumber Leicester callouts for leaks, bursts, and urgent plumbing faults',
-    heroDescription:
-      'When plumbing problems cannot wait, we respond quickly to control damage, restore water systems, and keep your home or premises safe and functional.',
+    heroTitle: '24/7 Emergency Plumber In Leicestershire',
+    heroDescription: 'We Will Be At Your Door In 1 Hour Or Less',
     overview:
       'Our emergency plumber Leicester service covers urgent leaks, burst pipes, blocked pipework, overflowing fixtures, and other sudden plumbing issues that need immediate attention.',
     overviewPoints: [
@@ -243,11 +241,44 @@ export const aboutPoints = [
 ];
 
 export const contactReasons = [
+  'Emergency Electrical Repairs',
+  'Electrical Installations',
+  'Electrical Rewiring',
+  'Fuseboard Replacements',
+  'Emergency Plumbing',
+  'Plumbing Blockages',
+  'Burst Pipes',
+  'Boiler Repairs',
+  'No Hot Water',
+  'Leaks & Drips',
   'Emergency electrical faults',
   'Leaks, bursts, and urgent plumbing callouts',
   'Boiler breakdowns and heating issues',
   'Free quotes for planned repair or rewiring work',
 ];
+
+export const heroLeadServiceGroups = [
+  {
+    label: 'Electrical',
+    options: [
+      'Emergency Electrical Repairs',
+      'Electrical Installations',
+      'Electrical Rewiring',
+      'Fuseboard Replacements',
+    ],
+  },
+  {
+    label: 'Plumbing',
+    options: [
+      'Emergency Plumbing',
+      'Plumbing Blockages',
+      'Burst Pipes',
+      'Boiler Repairs',
+      'No Hot Water',
+      'Leaks & Drips',
+    ],
+  },
+] as const;
 
 export const footerServices = services.map(({ title, path }) => ({ title, path }));
 

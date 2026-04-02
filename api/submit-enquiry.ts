@@ -6,6 +6,7 @@ type FormSubmissionPayload = {
   name?: string;
   phone?: string;
   email?: string;
+  postcode?: string;
   serviceNeeded?: string;
   message?: string;
   website?: string;
@@ -82,6 +83,7 @@ function buildEmailContent(payload: FormSubmissionPayload) {
     ['Name', payload.name],
     ['Phone', payload.phone],
     ['Email', payload.email],
+    ['Postcode', payload.postcode],
     ['Service needed', payload.serviceNeeded],
     ['Message', payload.message],
     ['Submitted at', new Date().toISOString()],
@@ -191,6 +193,7 @@ export async function POST(request: Request) {
     serviceNeeded: payload.serviceNeeded,
     phone: payload.phone,
     email: payload.email,
+    postcode: payload.postcode,
     submittedAt: new Date().toISOString(),
   };
 

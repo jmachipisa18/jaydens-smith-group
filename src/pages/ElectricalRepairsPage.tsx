@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import {
   BadgeCheck,
   Cable,
@@ -127,6 +128,14 @@ function HowWeWorkSection() {
 }
 
 export function ElectricalRepairsPage() {
+  const [selectedService, setSelectedService] = useState('');
+  const [prefillTrigger, setPrefillTrigger] = useState(0);
+
+  function handleServiceSelect(serviceTitle: string) {
+    setSelectedService(serviceTitle);
+    setPrefillTrigger((current) => current + 1);
+  }
+
   return (
     <ServicePageTemplate
       content={electricalRepairsContent!}
@@ -148,6 +157,7 @@ export function ElectricalRepairsPage() {
       ]}
       afterHero={
         <>
+          <EnquiryFormSection source="Electrical Repairs page hero form" />
           <section className="section-space bg-white">
             <div className="container-shell">
               <div className="mx-auto max-w-4xl">
@@ -161,10 +171,18 @@ export function ElectricalRepairsPage() {
             title="Emergency Electrical Services We Provide"
             description="Common electrical issues and urgent services we can help with."
             items={electricalIssueCards}
+            onItemSelect={handleServiceSelect}
           />
         </>
       }
-      afterContent={<EnquiryFormSection source="Electrical Repairs page" />}
+      afterContent={
+        <EnquiryFormSection
+          sectionId="electrical-repairs-form"
+          source="Electrical Repairs page"
+          prefilledService={selectedService}
+          prefillTrigger={prefillTrigger}
+        />
+      }
     />
   );
 }

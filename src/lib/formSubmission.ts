@@ -17,6 +17,7 @@ export type SharedEnquiryValues = {
 export type ContactEnquiryValues = {
   name: string;
   phone: string;
+  postcode: string;
   serviceNeeded: string;
   message: string;
   website: string;
@@ -33,6 +34,7 @@ export type FormSubmissionPayload = {
   name?: string;
   phone: string;
   email?: string;
+  postcode?: string;
   serviceNeeded: string;
   message?: string;
   website?: string;

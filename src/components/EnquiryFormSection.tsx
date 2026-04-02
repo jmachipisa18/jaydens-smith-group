@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import {
   enquiryServiceOptions,
   submitFormPayload,
@@ -19,12 +19,64 @@ const initialValues: SharedEnquiryValues = {
 
 type Props = {
   source?: string;
+  sectionId?: string;
+  prefilledService?: string;
+  prefillTrigger?: number;
 };
 
-export function EnquiryFormSection({ source = 'Website enquiry form' }: Props) {
+export function EnquiryFormSection({
+  source = 'Website enquiry form',
+  sectionId,
+  prefilledService,
+  prefillTrigger = 0,
+}: Props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<SharedEnquiryErrors>({});
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' });
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const firstNameRef = useRef<HTMLInputElement | null>(null);
+  const lastNameRef = useRef<HTMLInputElement | null>(null);
+  const phoneRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (!prefilledService || prefillTrigger === 0) {
+      return;
+    }
+
+    setValues((current) => ({
+      ...current,
+      serviceNeeded: prefilledService,
+    }));
+    setErrors((current) => ({ ...current, serviceNeeded: undefined }));
+    setSubmitState((current) => (current.status === 'error' ? { status: 'idle' } : current));
+
+    const formSection = sectionRef.current;
+    if (!formSection) {
+      return;
+    }
+
+    const offsetTop = formSection.getBoundingClientRect().top + window.scrollY - 120;
+    window.scrollTo({
+      top: Math.max(offsetTop, 0),
+      left: 0,
+      behavior: 'smooth',
+    });
+
+    const focusTimeout = window.setTimeout(() => {
+      const nextEmptyField = [firstNameRef.current, lastNameRef.current, phoneRef.current, emailRef.current].find(
+        (field) => field && field.value.trim().length === 0,
+      );
+
+      if (!nextEmptyField) {
+        return;
+      }
+
+      nextEmptyField.focus({ preventScroll: true });
+    }, 450);
+
+    return () => window.clearTimeout(focusTimeout);
+  }, [prefilledService, prefillTrigger]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -68,7 +120,7 @@ export function EnquiryFormSection({ source = 'Website enquiry form' }: Props) {
   }
 
   return (
-    <section className="section-space bg-white">
+    <section ref={sectionRef} id={sectionId} className="section-space bg-white">
       <div className="container-shell">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-slate-200 bg-white p-7 shadow-soft sm:p-10">
           <div className="mx-auto max-w-2xl text-center">
@@ -88,6 +140,7 @@ export function EnquiryFormSection({ source = 'Website enquiry form' }: Props) {
               <span className="mb-2 block text-sm font-semibold text-brand-navy">First name</span>
               <input
                 required
+                ref={firstNameRef}
                 name="firstName"
                 value={values.firstName}
                 onChange={(event) => updateField('firstName', event.target.value)}
@@ -100,6 +153,7 @@ export function EnquiryFormSection({ source = 'Website enquiry form' }: Props) {
               <span className="mb-2 block text-sm font-semibold text-brand-navy">Last name</span>
               <input
                 required
+                ref={lastNameRef}
                 name="lastName"
                 value={values.lastName}
                 onChange={(event) => updateField('lastName', event.target.value)}
@@ -112,6 +166,7 @@ export function EnquiryFormSection({ source = 'Website enquiry form' }: Props) {
               <span className="mb-2 block text-sm font-semibold text-brand-navy">Phone number</span>
               <input
                 required
+                ref={phoneRef}
                 name="phone"
                 value={values.phone}
                 onChange={(event) => updateField('phone', event.target.value)}
@@ -125,6 +180,7 @@ export function EnquiryFormSection({ source = 'Website enquiry form' }: Props) {
               <input
                 required
                 type="email"
+                ref={emailRef}
                 name="email"
                 value={values.email}
                 onChange={(event) => updateField('email', event.target.value)}
@@ -145,6 +201,9 @@ export function EnquiryFormSection({ source = 'Website enquiry form' }: Props) {
                 <option value="" disabled>
                   Select a service
                 </option>
+                {prefilledService && !enquiryServiceOptions.includes(prefilledService as (typeof enquiryServiceOptions)[number]) ? (
+                  <option value={prefilledService}>{prefilledService}</option>
+                ) : null}
                 {enquiryServiceOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
