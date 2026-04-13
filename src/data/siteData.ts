@@ -189,13 +189,13 @@ const serviceCardIconMap: Record<string, LucideIcon> = {
 
 const serviceCardDescriptions: Record<string, string> = {
   'Electrical Repairs':
-    'From fault finding and tripping circuits to fully operating systems, we deliver safe, tidy, and responsive repairs across homes and local businesses.',
+    'From tripping fuse boxes to faulty sockets and lighting issues, we provide fast, reliable electrical repairs across Leicester to restore safety and power quickly.',
   Rewiring:
-    'We provide partial and full rewiring, extensions, and renovation projects within Leicester homes, with careful planning and tidy installation throughout.',
+    'We provide full and partial rewiring services across Leicester, upgrading unsafe wiring and ensuring your home is safe, compliant, and built for modern use.',
   'Emergency Plumbing':
-    services.find((service) => service.title === 'Emergency Plumbing')?.heroDescription ?? '',
+    'Burst pipe, blocked drain, or sudden leak? Our emergency plumbers respond quickly across Leicester to fix urgent issues and prevent further damage fast.',
   'Boiler Repairs':
-    'We troubleshoot boiler faults quickly and provide boiler repairs to restore heating and hot water with minimal delay.',
+    'No heating or hot water? We diagnose and repair boiler faults quickly, restoring your heating system and keeping your home warm with minimal disruption.',
 };
 
 export const serviceCards = services.map(({ title, path }) => ({

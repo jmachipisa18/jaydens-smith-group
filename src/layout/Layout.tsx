@@ -56,14 +56,14 @@ export function Layout() {
               </div>
             </Link>
 
-            <nav className="hidden flex-1 items-center justify-center lg:flex">
-              <div className="flex items-center gap-8 xl:gap-10">
+            <nav className="hidden flex-1 items-center justify-center xl:flex">
+              <div className="flex items-center gap-5 xl:gap-6">
                 {standardNavLinks.slice(0, 1).map((link) => (
                   <NavLink
                     key={link.path}
                     to={link.path}
                     className={({ isActive }) =>
-                      `relative text-sm font-semibold ${
+                      `relative whitespace-nowrap text-[13px] font-semibold xl:text-sm ${
                         isActive ? 'text-brand-orange' : 'text-brand-navy hover:text-brand-orange'
                       }`
                     }
@@ -75,7 +75,7 @@ export function Layout() {
                 <div className="group relative">
                   <button
                     type="button"
-                    className={`inline-flex items-center gap-2 text-sm font-semibold transition duration-200 ${
+                    className={`inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-semibold transition duration-200 xl:gap-2 xl:text-sm ${
                       projectsActive ? 'text-brand-orange' : 'text-brand-navy group-hover:text-brand-orange'
                     }`}
                   >
@@ -106,7 +106,7 @@ export function Layout() {
                 <div className="group relative">
                   <button
                     type="button"
-                    className={`inline-flex items-center gap-2 text-sm font-semibold transition duration-200 ${
+                    className={`inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-semibold transition duration-200 xl:gap-2 xl:text-sm ${
                       emergencyActive ? 'text-brand-orange' : 'text-brand-navy group-hover:text-brand-orange'
                     }`}
                   >
@@ -139,7 +139,7 @@ export function Layout() {
                     key={link.path}
                     to={link.path}
                     className={({ isActive }) =>
-                      `relative text-sm font-semibold ${
+                      `relative whitespace-nowrap text-[13px] font-semibold xl:text-sm ${
                         isActive ? 'text-brand-orange' : 'text-brand-navy hover:text-brand-orange'
                       }`
                     }
@@ -150,19 +150,25 @@ export function Layout() {
               </div>
             </nav>
 
-            <div className="hidden items-center gap-3 lg:flex">
-              <a href={company.tel} className="inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
-                <Phone className="h-4 w-4 text-brand-orange" />
-                {company.phone}
+            <div className="hidden items-center xl:flex">
+              <a href={company.tel} className="primary-button px-5 xl:px-7">
+                <Phone className="h-4 w-4" />
+                Call Now
               </a>
-              <Link to="/contact#contact-form" className="primary-button">
-                Get a Quote
-              </Link>
             </div>
+
+            <a
+              href={company.tel}
+              className="primary-button min-h-[46px] px-4 sm:px-5 xl:hidden"
+              aria-label={`Call now ${company.phone}`}
+            >
+              <Phone className="h-4 w-4" />
+              <span className="hidden sm:inline">Call Now</span>
+            </a>
 
             <button
               type="button"
-              className="inline-flex rounded-full border border-slate-200 bg-white p-3 text-brand-navy shadow-sm transition duration-200 hover:border-orange-200 hover:text-brand-orange lg:hidden"
+              className="inline-flex rounded-full border border-slate-200 bg-white p-3 text-brand-navy shadow-sm transition duration-200 hover:border-orange-200 hover:text-brand-orange xl:hidden"
               onClick={() => setOpen((value) => !value)}
               aria-label="Toggle navigation"
               aria-expanded={open}
@@ -176,7 +182,7 @@ export function Layout() {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                className="overflow-hidden border-t border-slate-200 bg-white lg:hidden"
+                className="overflow-hidden border-t border-slate-200 bg-white xl:hidden"
               >
                 <div className="container-shell flex max-h-[calc(100vh-9rem)] flex-col space-y-1 overflow-y-auto py-4 pb-5">
                   {standardNavLinks.slice(0, 1).map((link) => (
@@ -241,13 +247,10 @@ export function Layout() {
                       {link.label}
                     </NavLink>
                   ))}
-                  <a href={company.tel} className="mt-4 inline-flex items-center gap-2 px-4 text-sm font-bold text-brand-navy">
-                    <Phone className="h-4 w-4 text-brand-orange" />
-                    {company.phone}
+                  <a href={company.tel} onClick={() => setOpen(false)} className="primary-button mt-4">
+                    <Phone className="h-4 w-4" />
+                    Call Now
                   </a>
-                  <Link to="/contact#contact-form" onClick={() => setOpen(false)} className="primary-button mt-3">
-                    Get a Quote
-                  </Link>
                 </div>
               </motion.div>
             ) : null}
@@ -255,11 +258,11 @@ export function Layout() {
         </div>
       </header>
 
-      <main className="pb-24 lg:pb-0">
+      <main className="pb-24 sm:pb-0">
         <Outlet />
       </main>
 
-      <div className="fixed inset-x-4 bottom-4 z-40 lg:hidden">
+      <div className="fixed inset-x-4 bottom-4 z-40 sm:hidden">
         <a
           href={company.tel}
           className="primary-button w-full rounded-[1.35rem] shadow-[0_18px_45px_rgba(244,124,32,0.35)]"

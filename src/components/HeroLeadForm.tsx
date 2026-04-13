@@ -54,7 +54,9 @@ export function HeroLeadForm() {
   return (
     <div className="w-full max-w-2xl rounded-[2rem] border border-white/70 bg-white p-5 text-brand-navy shadow-[0_26px_70px_rgba(8,22,38,0.22)] sm:p-8">
       <div className="max-w-xl text-center sm:text-left">
-        <p className="text-sm font-semibold uppercase tracking-[0.22em] text-brand-orange">Get Started</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-orange sm:text-sm sm:tracking-[0.22em]">
+          24 Hour Emergency Electrician &amp; Plumber
+        </p>
         <h1 className="mt-3 text-[1.95rem] font-extrabold tracking-tight sm:text-4xl">
           Tell us what you need and we&apos;ll get you to the right next step.
         </h1>

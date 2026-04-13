@@ -20,6 +20,10 @@ import { SectionIntro } from '../components/SectionIntro';
 
 const heroVanImage =
   'https://images.unsplash.com/photo-1725864832531-f50f4639dd00?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&q=80&w=2400';
+const electricalServicesImage =
+  'https://unsplash.com/photos/i5UA8CfAD34/download?force=true&w=2400';
+const plumbingServicesImage =
+  'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&fm=webp&q=80&w=2400';
 
 export function HomePage() {
   return (
@@ -209,37 +213,14 @@ export function HomePage() {
               </Link>
             </div>
 
-            <div className="rounded-[1.75rem] bg-brand-orange p-8 text-white shadow-[0_24px_60px_rgba(244,124,32,0.28)] sm:p-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-orange-100">Trusted Local Support</p>
-              <h3 className="mt-4 text-3xl font-extrabold leading-tight">
-                Electrical support for a wide range of property types and ongoing maintenance needs
-              </h3>
-              <p className="mt-6 font-bold leading-8 text-white">
-                Whether you need urgent fault finding or planned electrical work, we focus on dependable service,
-                practical communication, and results you can trust.
-              </p>
-              <div className="mt-8 grid gap-4 rounded-[1.5rem] border border-white/20 bg-white/10 p-5 sm:grid-cols-2">
-                <div>
-                  <p className="text-3xl font-extrabold">24/7</p>
-                  <p className="mt-1 text-sm text-orange-50">Emergency repairs available</p>
-                </div>
-                <div>
-                  <p className="text-xl font-extrabold sm:text-2xl">Who we work with</p>
-                  <ul className="mt-3 space-y-2 text-sm text-orange-50">
-                    {[
-                      'Domestic homes',
-                      'Small businesses and retail units',
-                      'HMOs and multi-tenant buildings',
-                      'Landlords and rental properties',
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/80" />
-                        <span className="font-extrabold text-white">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            <div className="relative min-h-[340px] overflow-hidden rounded-[1.75rem] bg-slate-200 shadow-[0_24px_60px_rgba(15,39,64,0.18)] sm:min-h-[420px] lg:min-h-[100%]">
+              <img
+                src={electricalServicesImage}
+                alt="Electrician working on wiring and electrical equipment"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/18 via-transparent to-transparent" />
             </div>
           </div>
         </div>
@@ -248,38 +229,14 @@ export function HomePage() {
       <section className="section-space bg-white">
         <div className="container-shell">
           <div className="grid gap-8 rounded-[2rem] bg-white p-6 shadow-soft lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
-            <div className="rounded-[1.75rem] bg-brand-navy p-8 text-white shadow-[0_24px_60px_rgba(15,39,64,0.26)] sm:p-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-orange">Trusted Plumbing Help</p>
-              <h3 className="mt-4 text-3xl font-extrabold leading-tight">
-                We fix any urgent leaks, plumbing faults, and planned repairs.
-              </h3>
-              <p className="mt-6 font-bold leading-8 text-white">
-                We approach every plumbing call with quick response, clear communication, and practical solutions
-                that help reduce disruption and restore confidence fast.
-              </p>
-              <div className="mt-8 grid gap-4 rounded-[1.5rem] border border-white/10 bg-white/5 p-5 sm:grid-cols-2">
-                <div>
-                  <p className="text-3xl font-extrabold">24/7</p>
-                  <p className="mt-1 text-sm text-white/75">Emergency plumbing callouts</p>
-                </div>
-                <div>
-                  <p className="text-xl font-extrabold sm:text-2xl">Who we work with</p>
-                  <ul className="mt-3 space-y-2 text-sm text-white/75">
-                    {[
-                      'Domestic homes',
-                      'Small businesses',
-                      'Offices and retail shops',
-                      'HMOs (houses in multiple occupation)',
-                      'Landlords and rental properties',
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/80" />
-                        <span className="font-extrabold text-white">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            <div className="relative min-h-[340px] overflow-hidden rounded-[1.75rem] bg-slate-200 shadow-[0_24px_60px_rgba(15,39,64,0.18)] sm:min-h-[420px] lg:min-h-[100%]">
+              <img
+                src={plumbingServicesImage}
+                alt="Plumber carrying out professional plumbing repairs"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/18 via-transparent to-transparent" />
             </div>
 
             <div className="flex flex-col justify-center">
